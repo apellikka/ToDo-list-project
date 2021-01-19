@@ -1,3 +1,4 @@
+import java.util.*;
 
 public class toDo {
 
@@ -17,19 +18,18 @@ public class toDo {
     return this.name;
   }
 
-  public void setUrgency() {
-    if (this.urgentTask = false) {
-      this.urgentTask = true;
-    }
-    this.urgentTask = false;
+  public void setUrgency(boolean setUrgency) {
+    this.urgentTask = setUrgency;
+  }
+
+  public boolean getUrgency() {
+    return this.urgentTask;
   }
 
   public String toString() {
-    if (this.urgentTask = true) {
+    if (this.urgentTask == true) {
       return this.name + " (Urgent)";
     }
     return this.name;
   }
-
-
 }
