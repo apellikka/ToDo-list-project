@@ -1,35 +1,24 @@
+
 import java.util.*;
+import java.io.*;
 
-public class toDo {
+public class toDo implements Serializable {
 
-  private String name;
-  private boolean urgentTask;
+    private String name;
 
-  public toDo(String name) {
-    this.name = name;
-    this.urgentTask = false;
-  }
-
-  public void setName(String setName) {
-    this.name = setName;
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  public void setUrgency(boolean setUrgency) {
-    this.urgentTask = setUrgency;
-  }
-
-  public boolean getUrgency() {
-    return this.urgentTask;
-  }
-
-  public String toString() {
-    if (this.urgentTask == true) {
-      return this.name + " (Urgent)";
+    public toDo(String name) {
+        this.name = name;
     }
-    return this.name;
-  }
+
+    public void setName(String setName) {
+        this.name = setName;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String toString() {
+        return this.name;
+    }
 }
