@@ -6,7 +6,7 @@ import java.util.*;
 import java.io.*;
 
 
-public class ToDoList {
+public class ToDoList implements Serializable {
 
     private ArrayList<toDo> toDoList;
 
@@ -33,37 +33,10 @@ public class ToDoList {
             }
         }
     }
-
     public ArrayList<toDo> getList() {
         return this.toDoList;
     }
-
-    public void saveFile(String file) throws IOException, ClassNotFoundException {
-        try {
-            FileOutputStream fos = new FileOutputStream("toDoList.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-            oos.writeObject(this.toDoList);
-            oos.flush();
-            oos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-        public void loadFile(String file){
-            try {
-                FileInputStream fis = new FileInputStream("toDoList.ser");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-
-                ArrayList<toDo> toDoList2 = (ArrayList<toDo>) ois.readObject();
-                ois.close();
-                toDoList = toDoList2;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+}
 
 
 

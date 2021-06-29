@@ -1,11 +1,10 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class UI {
 
     private final Scanner reader;
-    private final ToDoList list;
+    private ToDoList list;
 
     public UI() {
         this.reader = new Scanner(System.in);
@@ -13,8 +12,10 @@ public class UI {
     }
 
     public void start() throws IOException, ClassNotFoundException {
+
+
         System.out.println("Current to-do's: ");
-        list.loadFile("toDoList.ser");
+        loadFile("toDoList.ser");
         list.printToDoList();
 
 
@@ -32,7 +33,7 @@ public class UI {
                 System.out.println("Save changes? Y/N?");
                 String saveOrNot = reader.nextLine();
                 if (saveOrNot.matches(("[yY]"))) {
-                    list.saveFile("toDoList.ser");
+                    saveFile("toDoList.ser");
                     System.out.println("Save successful!");
                 }
                 System.out.println("Quitting!");
@@ -45,7 +46,7 @@ public class UI {
             } else if (input.equals("2")) {
                 if (this.list.getList().isEmpty()) {
                     System.out.println("List is empty.");
-                   continue;
+                    continue;
                 }
                 System.out.println("");
                 list.printToDoList();
@@ -56,6 +57,31 @@ public class UI {
                 System.out.println("");
                 list.printToDoList();
             }
+        }
+    }
+    public void saveFile(String file) {
+        try {
+            FileOutputStream fos = new FileOutputStream("toDoList.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(this.list);
+            oos.flush();
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadFile(String file){
+        try {
+            FileInputStream fis = new FileInputStream("toDoList.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            list = (ToDoList) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
